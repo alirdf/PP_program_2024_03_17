@@ -1,2 +1,2 @@
-Запустить скрипт sqlscript
-Запустить приложение в Visual Studio
+1 Запустить скрипт sqlscript
+2 Запустить приложение в Visual Studio

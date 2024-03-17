@@ -1,0 +1,109 @@
+﻿<Page x:Class="Kyrsovoi.Pages_.DatagridPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Kyrsovoi.Pages_"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DatagridPage" IsVisibleChanged="Page_IsVisibleChanged"> 
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Расписание">
+                <DataGrid x:Name="DGridRasp" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Группа" Binding ="{Binding Группа.Название_группы}" Width="*"/>
+                        <DataGridTextColumn Header="Преподаватель" Binding ="{Binding Преподаватель.ФИО}" Width="*"/>
+                        <DataGridTextColumn Header="Предмет" Binding="{Binding Предмет.Название_предмета}" Width="*"/>
+                        <DataGridTextColumn Header="Кабинет" Binding="{Binding Кабинет.Номер}" Width="*"/>
+                        <DataGridTextColumn Header="День" Binding="{Binding День, StringFormat=dd.MM.yyyy}" Width="*"/>
+                        <DataGridTemplateColumn Width="auto">
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem x:Name="tiStud" Header="Студенты">
+                <DataGrid x:Name="DGridStud" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Код студента" Binding ="{Binding Id_студента}" Width="*"/>
+                        <DataGridTextColumn Header="ФИО" Binding ="{Binding Имя}" Width="*"/>
+                        <DataGridTextColumn Header="Курс" Binding="{Binding Курс.Название_курса}" Width="*"/>
+                        <DataGridTextColumn Header="Группа" Binding="{Binding Группа.Название_группы}" Width="*"/>
+                        <DataGridTemplateColumn Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="BtnRed" Content="Редактировать" Click="BtnRed_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem x:Name="tiGroups" Header="Группы">
+                <DataGrid x:Name="DGridgroup" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Группа" Binding ="{Binding Id_группы}" Width="*"/>
+                        <DataGridTextColumn Header="Преподаватель" Binding ="{Binding Название_группы}" Width="*"/>
+                        <DataGridTemplateColumn Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="BtnRed" Content="Редактировать" Click="BtnRed_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem x:Name="tiPred" Header="Преподователи">
+                <DataGrid x:Name="DGridPred" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Группа" Binding ="{Binding Id_преподавателя}" Width="*"/>
+                        <DataGridTextColumn Header="Преподаватель" Binding ="{Binding ФИО}" Width="*"/>
+                        <DataGridTemplateColumn Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="BtnRed" Content="Редактировать" Click="BtnRed_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem x:Name="tiPredmet" Header="Предметы">
+                <DataGrid x:Name="DGridPredmet" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Группа" Binding ="{Binding Id_предмета}" Width="*"/>
+                        <DataGridTextColumn Header="Преподаватель" Binding ="{Binding Название_предмета}" Width="*"/>
+                        <DataGridTemplateColumn Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="BtnRed" Content="Редактировать" Click="BtnRed_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+        <StackPanel Margin="10,0,0,0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button x:Name="bt_otch" Content="Создать отчет" HorizontalAlignment="Center" VerticalAlignment="Center" Click="bt_otch_Click"/>
+            <Button x:Name="bt_rasp" Content="Создать расписание"  Click="bt_rasp_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button FontSize="20" x:Name="BtnAdd" Content="Добавить" Click="BtnAdd_Click"/>
+            <Button FontSize="20" x:Name="BtnDel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Удалить" Click="BtnDel_Click" Margin="10"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Поиск:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="tbsearch" TextChanged="tbsearch_TextChanged"  Width="700" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" />
+        </StackPanel>
+        
+    </Grid>
+</Page>
